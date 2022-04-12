@@ -1,3 +1,5 @@
+// This file is the entry point for react
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
