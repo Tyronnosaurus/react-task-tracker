@@ -12,25 +12,28 @@ import TaskDetails from './components/TaskDetails';
 function App() {
 
   // useState hook so that UI updates when we add/delete/modify tasks
-  const [tasks, setTasks] = useState([])
+  const [tasks, setTasks] = useState([]);
 
   // useState hook to update UI when toggling visibility of 'Add Task' form
-  const [showAddTask, setShowAddTask] = useState(false)
+  const [showAddTask, setShowAddTask] = useState(false);
 
 
 
   //// Load tasks on page load
   // useEffect hook performs side effects in components (e.g. fetching data)
-  useEffect( async () =>  {
-      const tasksFromServer = await fetchTasks()  // Fetch tasks from db
-      setTasks(tasksFromServer)                   // Load them into a stateful var
-    },
-    []  //No dependencies -> useEffect runs only on page load
-  )
+  useEffect( () => {
+    const getTasks = async () => {
+      const tasksFromServer = await fetchTasks()
+      setTasks(tasksFromServer)
+    }
+    getTasks()
+  },
+  []  //No dependencies -> useEffect runs only once on page load
+)
 
   
 
-  // Fetch tasks
+  // Fetch all tasks
   const fetchTasks = async () => {
     const res = await fetch('http://localhost:5000/tasks')
     const data = await res.json()
@@ -38,7 +41,7 @@ function App() {
   }
 
 
-  // Fetch task
+  // Fetch single task
   const fetchTask = async (id) => {
     const res = await fetch(`http://localhost:5000/tasks/${id}`)
     const data = await res.json()

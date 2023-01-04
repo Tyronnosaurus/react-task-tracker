@@ -15,25 +15,27 @@ function TaskDetails() {
     // The id can then be fetched by useParams:
     const params = useParams()
 
-    //
+    // useNavigate returns a function to navigate programatically
     const navigate = useNavigate()
 
-
-    // Function to fetch the task's info
-    const fetchTask = async () => {
-        const res = await fetch(`http://localhost:5000/tasks/${params.id}`)
-        const data = await res.json()
-        
-        // If task of given id is not found, navigate to main page
-        if (res.status === 404) navigate('/')
-
-        setTask(data)
-        setLoading(false)
-    }
-
+    
+    // useEffect hook to fetch task on load
     useEffect(
-        () => { fetchTask() },
-        []  // No dependencies -> Execute only once when component loads
+        () => {
+                // Function to fetch the task's info
+                const fetchTask = async () => { 
+                    const res = await fetch(`http://localhost:5000/tasks/${params.id}`)
+                    const data = await res.json()
+                    
+                    // If task of given id is not found, navigate to main page
+                    if (res.status === 404) navigate('/')
+            
+                    setTask(data)
+                    setLoading(false)
+                }
+                fetchTask()
+            },
+        [params, navigate]
     )
 
 
