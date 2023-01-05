@@ -5,7 +5,7 @@ import Button from './Button'
 
 function TaskDetails() {
 
-    // Stateful data -> We use useStateHook so that UI updates when data changes
+    // Use useState hook so that UI updates when certain data changes
     const [loading, setLoading] = useState(true)
     const [task, setTask] = useState({})
 

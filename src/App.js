@@ -14,7 +14,7 @@ function App() {
   // useState hook so that UI updates when we add/delete/modify tasks
   const [tasks, setTasks] = useState([]);
 
-  // useState hook to update UI when toggling visibility of 'Add Task' form
+  // useState hook so that UI updates when toggling visibility of 'Add Task' form
   const [showAddTask, setShowAddTask] = useState(false);
 
 
@@ -62,7 +62,7 @@ function App() {
     // Convert to JSON (since our server uses a JSON file as a database)
     const data = await res.json()
 
-    //
+    // Add data to tasks array and save it
     setTasks([...tasks, data])
 
     //Hide form
