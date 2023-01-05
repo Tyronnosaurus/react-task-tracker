@@ -35,7 +35,7 @@ function App() {
 
   // Fetch all tasks
   const fetchTasks = async () => {
-    const res = await fetch('http://localhost:5000/tasks')
+    const res = await fetch('/tasks')
     const data = await res.json()
     return(data)
   }
@@ -43,7 +43,7 @@ function App() {
 
   // Fetch single task
   const fetchTask = async (id) => {
-    const res = await fetch(`http://localhost:5000/tasks/${id}`)
+    const res = await fetch(`/tasks/${id}`)
     const data = await res.json()
     return(data)
   }
@@ -51,7 +51,7 @@ function App() {
 
   // Add task
   const addTask = async (task) => {
-    const res = await fetch('http://localhost:5000/tasks', {
+    const res = await fetch('/tasks', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
@@ -73,7 +73,7 @@ function App() {
 
   // Delete task
   const deleteTask = async (id) => {
-    await fetch(`http://localhost:5000/tasks/${id}`, {
+    await fetch(`/tasks/${id}`, {
       method: 'DELETE'
     })
 
@@ -93,7 +93,7 @@ function App() {
     const updTask = {...taskToToggle,reminder: !taskToToggle.reminder}
     
     // Save it back into the db
-    const res = await fetch(`http://localhost:5000/tasks/${id}`, {
+    const res = await fetch(`/tasks/${id}`, {
       method:'PUT',
       headers: {'Content-type': 'application/json'},
       body: JSON.stringify(updTask)
